@@ -1,5 +1,6 @@
 package model;
 
+import edu.tamu.core.sketch.Point;
 import edu.tamu.core.sketch.Stroke;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Path;
@@ -34,6 +35,13 @@ public class Sketch implements GraphElement{
             path.setStroke(Color.RED);
         } else {
             path.setStroke(Color.BLACK);
+        }
+    }
+
+    public void addSketch(Sketch sketch) {
+        this.path.getElements().addAll(sketch.getPath().getElements());
+        for (Point p : sketch.getStroke().getPoints()) {
+            this.getStroke().addPoint(p);
         }
     }
 

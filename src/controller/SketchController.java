@@ -90,7 +90,12 @@ public class SketchController {
         Stroke currentStroke = currentStrokes.get(event.getTouchPoint().getId());
         currentSketch.setStroke(currentStroke);
         Sketch sketch = currentSketch;
-
+        for (Sketch s : mController.getAllSketches()) {
+            if (s.getPath().intersects(sketch.getPath().getLayoutBounds())){
+                s.addSketch(sketch);
+                return s;
+            }
+        }
         currentSketches.remove(event.getTouchPoint().getId());
         currentStrokes.remove(event.getTouchPoint().getId());
 

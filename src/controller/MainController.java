@@ -130,7 +130,10 @@ public class MainController {
 
     }
 
-    
+    public ArrayList<Sketch> getAllSketches() {
+        return allSketches;
+    }
+
     //TODO FIX SO THAT YOU CAN USE KEYACTIONS
     /*private void initSceneActions(){
         aScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -451,6 +454,7 @@ public class MainController {
                 {
                     Sketch sketch = sketchController.onTouchReleased(event);
                     initSketchActions(sketch);
+
                     allSketches.add(sketch);
                     graph.addSketch(sketch);
                     undoManager.add(new AddDeleteSketchCommand(aDrawPane, sketch, true));
