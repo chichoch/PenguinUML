@@ -470,7 +470,7 @@ public class MainController {
             @Override
             public void handle(MouseEvent event) {
                 //TODO Maybe needs some check here?
-                if (event.getClickCount() == 2) {
+                if (event.getClickCount() == 2 && tool == ToolEnum.SELECT) {
                     nodeController.onDoubleClick(nodeView);
                 }
                 else if(tool == ToolEnum.MOVE_SCENE) {
