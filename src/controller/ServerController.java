@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.minlog.Log;
 import controller.MainController;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
@@ -46,11 +47,11 @@ public class ServerController implements PropertyChangeListener {
         } catch (UnknownHostException e){
             e.printStackTrace();
         }
-
+        Log.set(Log.LEVEL_TRACE);
         System.out.println(address.getHostAddress());
-        PortMapping desiredMapping = new PortMapping(54555, address.getHostAddress(), PortMapping.Protocol.TCP);
+        /*PortMapping desiredMapping = new PortMapping(54555, address.getHostAddress(), PortMapping.Protocol.TCP);
         UpnpService upnpService = new UpnpServiceImpl(new PortMappingListener(desiredMapping));
-        upnpService.getControlPoint().search();
+        upnpService.getControlPoint().search();*/
 
         server = new Server();
         server.start();

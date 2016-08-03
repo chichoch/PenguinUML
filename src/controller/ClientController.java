@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.minlog.Log;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
@@ -33,6 +34,7 @@ public class ClientController implements PropertyChangeListener {
         port = pPort;
 
         client = new Client();
+        Log.set(Log.LEVEL_TRACE);
 
         initKryo(client.getKryo());
 
