@@ -8,11 +8,18 @@ import controller.MainController;
 import javafx.application.Platform;
 import javafx.geometry.Point2D;
 import model.*;
+import org.fourthline.cling.UpnpService;
+import org.fourthline.cling.UpnpServiceImpl;
+import org.fourthline.cling.model.message.UpnpHeaders;
+import org.fourthline.cling.support.igd.PortMappingListener;
+import org.fourthline.cling.support.model.PortMapping;
 import util.Constants;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +39,18 @@ public class ServerController implements PropertyChangeListener {
         port = pPort;
         graph = pGraph;
         graph.addRemotePropertyChangeListener(this);
+
+        InetAddress address = null;
+        try {
+            address = InetAddress.getLocalHost();
+        } catch (UnknownHostException e){
+            e.printStackTrace();
+        }
+
+        System.out.println(address.getHostAddress());
+        PortMapping desiredMapping = new PortMapping(54555, address.getHostAddress(), PortMapping.Protocol.TCP);
+        UpnpService upnpService = new UpnpServiceImpl(new PortMappingListener(desiredMapping));
+        upnpService.getControlPoint().search();
 
         server = new Server();
         server.start();
